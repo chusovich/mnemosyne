@@ -18,7 +18,7 @@
 
   # Network Configuration
   networking = {
-    hostName = "menmosyne";
+    hostName = "mnemosyne";
     interfaces = {
       enp1s0 = {
         useDHCP = false;

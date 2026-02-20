@@ -1,6 +1,9 @@
-{ }:
+{ config, pkgs, ... }:
 
 {
+  imports = [
+  ];
+  
   # Restic Backups
   services.restic.backups = {
     immich = {

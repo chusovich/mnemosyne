@@ -21,7 +21,7 @@
   networking = {
     hostName = "mnemosyne";
     interfaces = {
-      end0 = {
+      enp3s0 = {
         useDHCP = false;
         ipv4.addresses = [ {
           address = "192.168.10.10";

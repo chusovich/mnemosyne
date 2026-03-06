@@ -6,31 +6,43 @@
 
 {
   imports =
-    [ 
-      ./hardware-configuration.nix # Include the results of the hardware scan.
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
     ];
 
-  # ZFS
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Use latest kernel.
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Hostname
+  networking.hostName = "mnemosyne"; # Define your hostname.
+ 
+  # ZFS 
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "media-pool" ];
   services.zfs.autoScrub.enable = true;
-  networking.hostId = "4e24220d"; # so ZFS can identify the server
+  networking.hostId = "4e24220d"; # for zfs identification
 
-  # Network Configuration
-  networking = {
-    hostName = "mnemosyne";
-    interfaces = {
-      enp3s0 = {
-        useDHCP = false;
-        ipv4.addresses = [ {
-          address = "192.168.10.20";
-          prefixLength = 24;
-        } ];
-      };
-    };
-    defaultGateway = "192.168.10.1";
-    nameservers = [ "192.168.10.1" ];
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "America/New_York";
+
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.mnemosyne = {
+    isNormalUser = true;
+    description = "Media sever user";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [];
   };
+
+  # List packages installed in system profile
+  environment.systemPackages = with pkgs; [
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -39,4 +51,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+
 }

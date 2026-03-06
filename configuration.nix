@@ -17,8 +17,21 @@
   # Use latest kernel.
   #boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Hostname
-  networking.hostName = "mnemosyne"; # Define your hostname.
+   # Network Configuration
+  networking = {
+    hostName = "mnemosyne";
+    interfaces = {
+      end0 = {
+        useDHCP = false;
+        ipv4.addresses = [ {
+          address = "192.168.10.10";
+          prefixLength = 24;
+        } ];
+      };
+    };
+    defaultGateway = "192.168.10.1";
+    nameservers = [ "192.168.10.1" ];
+  };
  
   # ZFS 
   boot.supportedFilesystems = [ "zfs" ];

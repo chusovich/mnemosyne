@@ -7,5 +7,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /home/mnemosyne/app-data/beszel_agent_data:/var/lib/beszel-agent
       # monitor other disks / partitions by mounting a folder in /extra-filesystems
-      - /mnt/immich:/extra-filesystems/immich:ro
-      - /mnt/jellyfin:/extra-filesystems/jellyfin:ro
+      #- /mnt/immich:/extra-filesystems/immich:ro
+      #- /mnt/jellyfin:/extra-filesystems/jellyfin:ro

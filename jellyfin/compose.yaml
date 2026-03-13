@@ -11,9 +11,9 @@ services:
       - /home/mnemosyne/app-data/jellyfin/config:/config
       - /home/mnemosyne/app-data/jellyfin/cache:/cache
       - type: bind
-        source: /media-pool/pinchflat
-        target: /pinchflat
-        read_only: true
+        source: /media-pool/tube-archivist
+        target: /tube-archivist
+      #  read_only: true
       #- type: bind
       #  source: /path/to/media2
       #  target: /media2

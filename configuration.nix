@@ -35,7 +35,7 @@
  
   # ZFS 
   boot.supportedFilesystems = [ "zfs" ];
-  #boot.zfs.extraPools = [ "media-pool" ];
+  boot.zfs.extraPools = [ "media-pool" ];
   services.zfs.autoScrub.enable = true;
   networking.hostId = "4e24220d"; # for zfs identification
 

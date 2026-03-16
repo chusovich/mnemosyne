@@ -9,7 +9,7 @@ services:
       # Please consider allowing analytics to help us improve Homebox (basic computer information, no personal data)
       - HBOX_OPTIONS_ALLOW_ANALYTICS=true
     volumes:
-      - /home/mnemosyne/app-datahomebox:/data/
+      - /home/mnemosyne/app-data/homebox:/data/
     # ports:
     #   - 3100:7745
     networks:
@@ -32,7 +32,7 @@ services:
       traefik.http.routers.homebox-https.tls: true
       traefik.http.routers.homebox-https.tls.certresolver: myresolver
       # Load Balancer      
-      traefik.http.services.homebox.loadbalancer.server.port: 3100
+      traefik.http.services.homebox.loadbalancer.server.port: 7745
 
 networks:
   traefik:

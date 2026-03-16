@@ -48,7 +48,7 @@ services:
       traefik.http.routers.radicale-https.rule: Host(`calendar.apps.husovich.com`)
       traefik.http.routers.radicale-https.entrypoints: https
       traefik.http.routers.radicale-https.service: radicale
-      traefik.http.routers.radical-https.tls: true
+      traefik.http.routers.radicale-https.tls: true
       traefik.http.routers.radicale-https.tls.certresolver: myresolver
       # Load Balancer      
       traefik.http.services.radicale.loadbalancer.server.port: 5232

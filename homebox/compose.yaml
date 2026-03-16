@@ -10,5 +10,30 @@ services:
       - HBOX_OPTIONS_ALLOW_ANALYTICS=true
     volumes:
       - /home/mnemosyne/app-datahomebox:/data/
-    ports:
-      - 3100:7745
+    # ports:
+    #   - 3100:7745
+    networks:
+      traefik:
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      # HTTP
+      traefik.http.routers.homebox-http.rule: Host(`homebox.apps.husovich.com`)
+      traefik.http.routers.homebox-http.entrypoints: http
+      traefik.http.routers.homebox-http.service: homebox
+      traefik.http.routers.homebox-http.middlewares: redirect-https
+      # HTTP Redirect
+      traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
+      traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
+      # HTTPS
+      traefik.http.routers.homebox-https.rule: Host(`homebox.apps.husovich.com`)
+      traefik.http.routers.homebox-https.entrypoints: https
+      traefik.http.routers.homebox-https.service: homebox
+      traefik.http.routers.homebox-https.tls: true
+      traefik.http.routers.homebox-https.tls.certresolver: myresolver
+      # Load Balancer      
+      traefik.http.services.homebox.loadbalancer.server.port: 3100
+
+networks:
+  traefik:
+    external: true

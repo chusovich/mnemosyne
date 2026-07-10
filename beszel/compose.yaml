@@ -1,0 +1,10 @@
+services:
+  beszel-agent:
+    extends:
+      file: ../containers/beszel-agent.yaml
+      service: beszel-agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /home/mnemosyne/app-data/beszel_agent:/var/lib/beszel-agent
+      # monitor other disks / partitions by mounting a folder in /extra-filesystems
+      - /media-pool:/extra-filesystems/media-pool:ro

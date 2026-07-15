@@ -37,7 +37,7 @@ just update-input X  # update a single flake input
 - Traefik expects the Cloudflare DNS API token at `/home/mnemosyne/secrets/CF_DNS_API_TOKEN` (bind-mounted). `secrets/` is gitignored; never commit it.
 - Certificates are stored at `/home/calebh/certs`.
 - Local service hostnames use `*.apps.husovich.com`; the shared `containers/traefik.yaml` still references `*.subdomain.husovich.com`.
-- Immich is configured by `immich/.env` (tracked) and exposes port `2283` directly, not through Traefik.
+- Immich is configured by `immich/.env` (tracked) and served through Traefik at `immich.apps.husovich.com`.
 - Jellyfin exposes ports `8096/tcp` and `7359/udp` directly.
 
 ## Storage / host assumptions

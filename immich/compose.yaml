@@ -20,8 +20,30 @@ services:
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
-    ports:
-      - "2283:2283"
+    # ports:
+    #   - "2283:2283"
+    networks:
+      - default
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      # HTTP
+      traefik.http.routers.immich-http.rule: Host(`immich.apps.husovich.com`)
+      traefik.http.routers.immich-http.entrypoints: http
+      traefik.http.routers.immich-http.service: immich
+      traefik.http.routers.immich-http.middlewares: redirect-https
+      # HTTP Redirect
+      traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
+      traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
+      # HTTPS
+      traefik.http.routers.immich-https.rule: Host(`immich.apps.husovich.com`)
+      traefik.http.routers.immich-https.entrypoints: https
+      traefik.http.routers.immich-https.service: immich
+      traefik.http.routers.immich-https.tls: true
+      traefik.http.routers.immich-https.tls.certresolver: myresolver
+      # Load Balancer
+      traefik.http.services.immich.loadbalancer.server.port: 2283
     depends_on:
       - redis
       - database
@@ -68,3 +90,6 @@ services:
       disable: false
 volumes:
   model-cache:
+networks:
+  traefik:
+    external: true

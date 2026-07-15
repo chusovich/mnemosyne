@@ -2,7 +2,7 @@
 # See also https://docs.docker.com/compose/production/#modify-your-compose-file-for-production
 services:
   radicale:
-    image: tomsquest/docker-radicale
+    image: tomsquest/docker-radicale:3.7.6.0
     container_name: radicale
     ports:
       - 5232:5232

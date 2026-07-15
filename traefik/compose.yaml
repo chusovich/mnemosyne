@@ -15,7 +15,6 @@ services:
       traefik.http.routers.traefik-secure.tls.domain[0].sans: "*.apps.husovich.com"
       traefik.http.routers.traefik.rule: Host(`traefik.apps.husovich.com`)
       traefik.http.routers.traefik-secure.rule: Host(`traefik.apps.husovich.com`)
-
   # Traefik Debugging Container
   whoami:
     extends:
@@ -26,11 +25,9 @@ services:
     labels:
       traefik.http.routers.whoami-web.rule: Host(`whoami.apps.husovich.com`)
       traefik.http.routers.whoami-websecure.rule: Host(`whoami.apps.husovich.com`)
-
 secrets:
   cf-dns-api-token:
     file: /home/mnemosyne/secrets/CF_DNS_API_TOKEN
-
 networks:
   traefik:
     external: true

@@ -9,15 +9,15 @@ services:
       - /media-pool/tube-archivist:/youtube
       - cache:/cache
     environment:
-      - ES_URL=http://archivist-es:9200     # needs protocol e.g. http and port
+      - ES_URL=http://archivist-es:9200 # needs protocol e.g. http and port
       - REDIS_CON=redis://archivist-redis:6379
       - HOST_UID=1000
       - HOST_GID=1000
-      - TA_HOST=http://192.168.10.10:8000  # set your host name with protocol and port
-      - TA_USERNAME=tubearchivist           # your initial TA credentials
-      - TA_PASSWORD=verysecret              # your initial TA credentials
-      - ELASTIC_PASSWORD=verysecret         # set password for Elasticsearch
-      - TZ=America/New_York                 # set your time zone
+      - TA_HOST=http://192.168.10.10:8000 # set your host name with protocol and port
+      - TA_USERNAME=tubearchivist # your initial TA credentials
+      - TA_PASSWORD=verysecret # your initial TA credentials
+      - ELASTIC_PASSWORD=verysecret # set password for Elasticsearch
+      - TZ=America/New_York # set your time zone
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/health/"]
       interval: 2m
@@ -38,11 +38,11 @@ services:
     depends_on:
       - archivist-es
   archivist-es:
-    image: bbilly1/tubearchivist-es         # only for amd64, or use official es 8.19.0
+    image: bbilly1/tubearchivist-es # only for amd64, or use official es 8.19.0
     container_name: archivist-es
     restart: unless-stopped
     environment:
-      - "ELASTIC_PASSWORD=verysecret"       # matching Elasticsearch password
+      - "ELASTIC_PASSWORD=verysecret" # matching Elasticsearch password
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - "xpack.security.enabled=true"
       - "discovery.type=single-node"
@@ -52,10 +52,9 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es:/usr/share/elasticsearch/data    # check for permission error when using bind mount, see readme
+      - es:/usr/share/elasticsearch/data # check for permission error when using bind mount, see readme
     expose:
       - "9200"
-
 volumes:
   #media:
   cache:

@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -17,25 +18,26 @@
   # Use latest kernel.
   #boot.kernelPackages = pkgs.linuxPackages_latest;
 
-   # Network Configuration
+  # Network Configuration
   networking = {
     hostName = "mnemosyne";
     interfaces = {
       enp3s0 = {
         useDHCP = false;
-        ipv4.addresses = [ {
+        ipv4.addresses = [{
           address = "192.168.10.10";
           prefixLength = 24;
-        } ];
+        }];
       };
     };
     defaultGateway = "192.168.10.1";
     nameservers = [ "192.168.10.1" ];
   };
- 
-  # ZFS 
+
+  # ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "media-pool" ];
+  boot.zfs.forceImportRoot = false;
   services.zfs.autoScrub.enable = true;
   networking.hostId = "4e24220d"; # for zfs identification
 
@@ -45,12 +47,12 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mnemosyne = {
     isNormalUser = true;
     description = "Media sever user";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   # List packages installed in system profile

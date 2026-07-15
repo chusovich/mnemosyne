@@ -1,0 +1,12 @@
+# Nix build outputs
+result
+result-*
+
+# Secrets
+secrets/
+
+# Editor / OS
+*.swp
+*.swo
+*~
+.DS_Store

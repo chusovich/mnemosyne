@@ -31,9 +31,8 @@ services:
       traefik.http.routers.homebox-https.service: homebox
       traefik.http.routers.homebox-https.tls: true
       traefik.http.routers.homebox-https.tls.certresolver: myresolver
-      # Load Balancer      
+      # Load Balancer
       traefik.http.services.homebox.loadbalancer.server.port: 7745
-
 networks:
   traefik:
     external: true

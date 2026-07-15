@@ -10,19 +10,15 @@ services:
     volumes:
       - /home/mnemosyne/app-data/jellyfin/config:/config
       - /home/mnemosyne/app-data/jellyfin/cache:/cache
-      - type: bind
-        source: /media-pool/tube-archivist
-        target: /tube-archivist
-        #  read_only: true
-        #- type: bind
-        #  source: /path/to/media2
-        #  target: /media2
-        #  read_only: true
-        # Optional - extra fonts to be used during transcoding with subtitle burn-in
-        #- type: bind
-        #  source: /path/to/fonts
-        #  target: /usr/local/share/fonts/custom
-        #  read_only: true
+      #- type: bind
+      #  source: /path/to/media2
+      #  target: /media2
+      #  read_only: true
+      # Optional - extra fonts to be used during transcoding with subtitle burn-in
+      #- type: bind
+      #  source: /path/to/fonts
+      #  target: /usr/local/share/fonts/custom
+      #  read_only: true
     restart: unless-stopped
     # Optional - alternative address used for autodiscovery
     environment:

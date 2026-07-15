@@ -72,11 +72,11 @@
         "opencode": "opencode"
       },
       "locked": {
-        "lastModified": 1784129007,
-        "narHash": "sha256-5SqR6QxflRQRyCierOSzV4vQqzRDk7pEna6xGo0Aexs=",
+        "lastModified": 1784129457,
+        "narHash": "sha256-YPbmZ+IhKHfdgyBGxTXKSlj+uGzYKigsgqBQBCaqdZk=",
         "owner": "chusovich",
         "repo": "nix-core",
-        "rev": "c579cd5079005d53cfd97ad00aa38959be967e61",
+        "rev": "5bfa7c8ba4c980727236ad9a4b8fa79690366742",
         "type": "github"
       },
       "original": {

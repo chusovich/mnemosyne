@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nix-core = {
-      url = "github:chusovich/nix-core/0.1.0";
+      url = "github:chusovich/nix-core/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix = {

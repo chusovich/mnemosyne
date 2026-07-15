@@ -32,6 +32,12 @@
     };
     defaultGateway = "192.168.10.1";
     nameservers = [ "192.168.10.1" ];
+
+    # ESPHome Device Builder (remote build server) mDNS + dashboard/peer-link
+    firewall = {
+      allowedUDPPorts = [ 5353 ]; # mDNS
+      allowedTCPPorts = [ 6052 6055 ]; # dashboard + peer-link
+    };
   };
 
   # ZFS

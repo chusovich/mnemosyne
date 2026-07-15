@@ -1,6 +1,7 @@
 services:
   homebox:
     image: ghcr.io/sysadminsmedia/homebox:0.26.2-rootless
+    user: "1000:100"
     restart: always
     environment:
       - HBOX_LOG_LEVEL=info

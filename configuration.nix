@@ -34,6 +34,7 @@
     nameservers = [ "192.168.10.1" ];
 
     # ESPHome Device Builder (remote build server) mDNS + dashboard/peer-link
+    #firewall.enable = false;
     firewall = {
       allowedUDPPorts = [ 5353 ]; # mDNS
       allowedTCPPorts = [ 6052 6055 ]; # dashboard + peer-link
@@ -65,6 +66,23 @@
   environment.systemPackages = with pkgs; [
   ];
 
+  # Remote builder user
+  users.users.builder = {
+    isNormalUser = true;
+    description = "nixos remote builder";
+    extraGroups = [ ];
+    packages = with pkgs; [];
+  };
+
+  # Allow this machine to be used as a remote builder
+  nix.settings.trusted-users = [
+    "builder"	
+  ];
+
+  # Enable arm/raspi builds
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nix.settings.extra-platforms = [ "aarch64-linux" ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -72,5 +90,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }

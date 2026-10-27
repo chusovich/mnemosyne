@@ -4,7 +4,7 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     environment:
-      DOMAIN: "https://passwords.apps.husovich.com" # required when using a reverse proxy; your domain; vaultwarden needs to know it's https to work properly with attachments
+      DOMAIN: "https://vaultwarden.apps.husovich.com" # required when using a reverse proxy; your domain; vaultwarden needs to know it's https to work properly with attachments
       #SIGNUPS_ALLOWED: "true" # Deactivate this with "false" after you have created your account so that no strangers can register
     volumes:
       - /home/calebh/app-data/vaultwarden:/data
@@ -16,7 +16,7 @@ services:
       traefik.enable: true
       traefik.docker.network: traefik
       # HTTP
-      traefik.http.routers.vaultwarden-http.rule: Host(`passwords.apps.husovich.com`)
+      traefik.http.routers.vaultwarden-http.rule: Host(`vaultwarden.apps.husovich.com`)
       traefik.http.routers.vaultwarden-http.entrypoints: http
       traefik.http.routers.vaultwarden-http.service: vaultwarden
       traefik.http.routers.vaultwarden-http.middlewares: redirect-https
@@ -24,7 +24,7 @@ services:
       traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
       traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
       # HTTPS
-      traefik.http.routers.vaultwarden-https.rule: Host(`passwords.apps.husovich.com`)
+      traefik.http.routers.vaultwarden-https.rule: Host(`vaultwarden.apps.husovich.com`)
       traefik.http.routers.vaultwarden-https.entrypoints: https
       traefik.http.routers.vaultwarden-https.service: vaultwarden
       traefik.http.routers.vaultwarden-https.tls: true

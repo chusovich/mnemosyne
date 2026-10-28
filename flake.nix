@@ -3,7 +3,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nix-core = {
       url = "github:chusovich/nix-core/v2026.10.2";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

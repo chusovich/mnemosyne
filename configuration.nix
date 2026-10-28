@@ -15,9 +15,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # Network Configuration
   networking = {
     hostName = "mnemosyne";
@@ -50,13 +47,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mnemosyne = {
     isNormalUser = true;
-    description = "Media sever user";
+    description = "Media server user";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ ];
   };

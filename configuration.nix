@@ -71,12 +71,12 @@
     isNormalUser = true;
     description = "nixos remote builder";
     extraGroups = [ ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   # Allow this machine to be used as a remote builder
   nix.settings.trusted-users = [
-    "builder"	
+    "builder"
   ];
 
   # Enable arm/raspi builds

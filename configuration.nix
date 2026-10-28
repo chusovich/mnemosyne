@@ -34,7 +34,6 @@
     nameservers = [ "192.168.10.1" ];
 
     # ESPHome Device Builder (remote build server) mDNS + dashboard/peer-link
-    #firewall.enable = false;
     firewall = {
       allowedUDPPorts = [ 5353 ]; # mDNS
       allowedTCPPorts = [ 6052 6055 ]; # dashboard + peer-link
@@ -63,8 +62,7 @@
   };
 
   # List packages installed in system profile
-  environment.systemPackages = with pkgs; [
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # Remote builder user
   users.users.builder = {

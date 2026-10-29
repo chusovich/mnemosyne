@@ -37,6 +37,9 @@
     };
   };
 
+  # Update Tailscale auth key path
+  services.tailscale.authKeyFile = "/var/lib/secrets/tailscale-auth-key";
+
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "media-pool" ];

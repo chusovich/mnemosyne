@@ -15,9 +15,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # Network Configuration
   networking = {
     hostName = "mnemosyne";
@@ -34,12 +31,14 @@
     nameservers = [ "192.168.10.1" ];
 
     # ESPHome Device Builder (remote build server) mDNS + dashboard/peer-link
-    #firewall.enable = false;
     firewall = {
       allowedUDPPorts = [ 5353 ]; # mDNS
       allowedTCPPorts = [ 6052 6055 ]; # dashboard + peer-link
     };
   };
+
+  # Update Tailscale auth key path
+  services.tailscale.authKeyFile = "/var/lib/secrets/tailscale-auth-key";
 
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
@@ -51,32 +50,28 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mnemosyne = {
     isNormalUser = true;
-    description = "Media sever user";
+    description = "Media server user";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ ];
   };
 
   # List packages installed in system profile
-  environment.systemPackages = with pkgs; [
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # Remote builder user
   users.users.builder = {
     isNormalUser = true;
     description = "nixos remote builder";
     extraGroups = [ ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   # Allow this machine to be used as a remote builder
   nix.settings.trusted-users = [
-    "builder"	
+    "builder"
   ];
 
   # Enable arm/raspi builds

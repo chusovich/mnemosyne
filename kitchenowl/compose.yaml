@@ -1,0 +1,49 @@
+services:
+  front:
+    image: tombursch/kitchenowl-web:v0.8.1
+    container_name: kitchenowl-web
+    restart: unless-stopped
+    depends_on:
+      - back
+    networks:
+      - default
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      # HTTP
+      traefik.http.routers.kitchenowl-http.rule: Host(`kitchenowl.apps.husovich.com`)
+      traefik.http.routers.kitchenowl-http.entrypoints: http
+      traefik.http.routers.kitchenowl-http.service: kitchenowl
+      traefik.http.routers.kitchenowl-http.middlewares: redirect-https
+      # HTTP Redirect
+      traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
+      traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
+      # HTTPS
+      traefik.http.routers.kitchenowl-https.rule: Host(`kitchenowl.apps.husovich.com`)
+      traefik.http.routers.kitchenowl-https.entrypoints: https
+      traefik.http.routers.kitchenowl-https.service: kitchenowl
+      traefik.http.routers.kitchenowl-https.tls: true
+      traefik.http.routers.kitchenowl-https.tls.certresolver: myresolver
+      # Load Balancer
+      traefik.http.services.kitchenowl.loadbalancer.server.port: 80
+
+  back:
+    image: tombursch/kitchenowl-backend:v0.8.1
+    container_name: kitchenowl-back
+    restart: unless-stopped
+    environment:
+      FRONT_URL: https://kitchenowl.apps.husovich.com
+      JWT_SECRET_KEY_FILE: /run/secrets/jwt-secret
+    secrets:
+      - jwt-secret
+    volumes:
+      - /home/mnemosyne/app-data/kitchenowl:/data
+
+secrets:
+  jwt-secret:
+    file: /home/mnemosyne/secrets/KITCHENOWL_JWT_SECRET
+
+networks:
+  traefik:
+    external: true

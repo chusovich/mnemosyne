@@ -13,7 +13,7 @@
 
       modules = [
         nix-core.nixosModules.default
-        nix-core.nixosModules.tailscale
+        nix-core.nixosModules.ai
         ./configuration.nix
       ];
     };

@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-core = {
-      url = "github:chusovich/nix-core/v2026.10.2";
+      url = "github:chusovich/nix-core/v2026.11.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -13,7 +13,6 @@
 
       modules = [
         nix-core.nixosModules.default
-        nix-core.nixosModules.ai
         ./configuration.nix
       ];
     };
